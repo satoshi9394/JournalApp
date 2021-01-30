@@ -7,7 +7,7 @@ const JournalEntry = () => {
         className="journal__entry-pricture"
         style={{
           backgroundSize: 'cover',
-          backgroundImage: 'url(https://i.imgur.com/IkGT0xU.jpeg)'
+          backgroundImage: 'url(https://i.imgur.com/xbQ9KB3.jpeg)'
         }}
       >
       </div>
