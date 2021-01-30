@@ -10,7 +10,7 @@ const LoginScreen = () => {
 
   const [ formValues, handleInputChange , reset] = useForm({
     email: 'usuario1@gmail.com',
-    password: '123456789'
+    password: '1234'
   });
 
   const { email, password } = formValues
