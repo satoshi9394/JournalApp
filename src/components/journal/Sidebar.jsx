@@ -1,4 +1,5 @@
 import React from 'react'
+import JorunalEntris from './JorunalEntris'
 
 const Sidebar = () => {
   return (
@@ -18,6 +19,7 @@ const Sidebar = () => {
           New entry
         </p>
       </div>
+      <JorunalEntris/>
     </aside>
   )
 }
