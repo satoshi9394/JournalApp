@@ -9,6 +9,22 @@ export const startLogingEmailPassword = (email, password) => {
   }
 }
 
+export const startRegisterWithEmailPassword = (email, password, name) => {
+  return (dispatch) => {
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then( async ({user}) => {
+        await user.updateProfile({ displayName: name});
+        console.info(user)
+        dispatch(
+          login(user.uid, user.displayName)
+        )
+      })
+      .catch( e => {
+        console.error('msgError:', e)
+      })
+  }
+}
+
 export const startGoogleLogin = () => {
   return (dispatch) => {
     firebase.auth().signInWithPopup( googleAuthProvider )

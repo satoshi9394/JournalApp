@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setError, removeError } from '../../actions/ui';
 import validator from 'validator';
 import useForm from '../../hooks/useForm';
+import { startRegisterWithEmailPassword } from '../../actions/auth';
 
 const RegisterScreen = () => {
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const { msgError } = useSelector(state => state.ui);
 
   const [ formValues, handleInputChange] = useForm({
     name: 'Angel',
@@ -21,7 +23,7 @@ const RegisterScreen = () => {
   const handleRegister = (e) => {
     e.preventDefault();
     if( isFormValid()) {
-      console.log('Formulario correcto')
+      dispatch(startRegisterWithEmailPassword( email, password, name ));
     }
     
   }
@@ -48,9 +50,14 @@ const RegisterScreen = () => {
     <>
       <h3 className="auth__title">Registro</h3>
       <form onSubmit={handleRegister}>
-        <div className="auth__alert-error">
-          hola mundo
-        </div>
+        {
+          msgError &&
+          (
+            <div className="auth__alert-error">
+              { msgError }
+            </div>
+          )
+        }
         <input
           type="name"
           placeholder="Nombre"
