@@ -1,7 +1,15 @@
+import Swal from 'sweetalert2';
 import { types } from '../types/types';
 
 export const setError = ( err ) => {
-  return{
+  return (dispatch) => {
+    Swal.fire('Error', err, 'error');
+    dispatch(setErroState);
+  }
+}
+
+export const setErroState = (err) => {
+  return {
     type: types.uiSetError,
     payload: err
   }
