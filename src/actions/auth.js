@@ -53,3 +53,18 @@ export const login = (uid, displayName) => {
     }
   }
 }
+
+export const startLogout = () => {
+  return async (dispatch) => {
+    try {
+      await auth.signOut();
+      dispatch( logout() );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
+export const logout = () => ({
+  type: types.logout
+});

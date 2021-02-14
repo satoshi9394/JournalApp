@@ -1,7 +1,14 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { startLogout } from '../../actions/auth';
 import JorunalEntris from './JorunalEntris'
 
 const Sidebar = () => {
+
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(startLogout());
+  }
   return (
     <aside className="joirnal__sidebar">
       <div className="joirnal__sidebar-navbar">
@@ -9,7 +16,10 @@ const Sidebar = () => {
         <i  className="far fa-moon"></i>
           <span> Angel santillan</span>
         </h3>
-        <button className="btn">
+        <button 
+          className="btn"
+          onClick={ handleLogout }
+        >
           logout
         </button>
       </div>
