@@ -1,20 +1,19 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { startLogout } from '../../actions/auth';
 import JorunalEntris from './JorunalEntris'
 
 const Sidebar = () => {
 
+  const { name } = useSelector(state => state.auth);
   const dispatch = useDispatch();
-  const handleLogout = () => {
-    dispatch(startLogout());
-  }
+  const handleLogout = () => (dispatch(startLogout()));
   return (
     <aside className="joirnal__sidebar">
       <div className="joirnal__sidebar-navbar">
         <h3 className="mt-5">
         <i  className="far fa-moon"></i>
-          <span> Angel santillan</span>
+          <span> { name } </span>
         </h3>
         <button 
           className="btn"
