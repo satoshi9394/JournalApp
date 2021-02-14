@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,14 +12,28 @@ import JournalScreen from '../components/journal/JournalScreen';
 import AuthRouter from './AuthRouter';
 
 const AppRouter = () => {
+
   const dispatch = useDispatch();
+  const [ checking, setchecking ] = useState(true);
+  const [ isLoggedIn, setisLoggedIn ] = useState(false)
+
   useEffect(() => {
     auth.onAuthStateChanged( (user) => {
       if (user?.uid) {
         dispatch( login( user.uid, user.displayName ));
+        setisLoggedIn(true);
+      } else {
+        setisLoggedIn(false);
       }
+      setchecking(false);
     });
-  }, [dispatch]);
+  }, [dispatch, setchecking, setisLoggedIn]);
+
+  if (checking) {
+    return (
+      <h1>Espere...</h1>
+    )
+  }
 
   return (
     <Router>
