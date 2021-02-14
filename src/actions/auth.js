@@ -1,14 +1,18 @@
 import { auth, googleAuthProvider } from '../firebase/firebaseConfig';
 import { types } from '../types/types';
+import { finishLoading, startLoading } from './ui';
 
 export const startLogingEmailPassword = (email, password) => {
   return (dispatch) => {
+    dispatch(startLoading());
     auth.signInWithEmailAndPassword(email, password)
       .then( ({user}) => {
         dispatch(login(user.uid, user.displayName))
+        dispatch(finishLoading());
       })
       .catch( e => {
-        console.error('msgError:', e)
+        console.error('msgError:', e);
+        dispatch(finishLoading());
       })
   }
 }

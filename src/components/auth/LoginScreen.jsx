@@ -9,7 +9,7 @@ import useForm from '../../hooks/useForm'
 const LoginScreen = () => {
 
   const dispatch = useDispatch()
-  const { msgError } = useSelector(state => state.ui);
+  const { msgError, loading } = useSelector(state => state.ui);
 
   const [ formValues, handleInputChange , reset] = useForm({
     email: 'usuario1@gmail.com',
@@ -74,7 +74,7 @@ const LoginScreen = () => {
         <button
           className="btn btn-primary btn-block"
           type="submit"
-          disabled={ false }
+          disabled={ loading }
         >
           Ingresar
         </button>
