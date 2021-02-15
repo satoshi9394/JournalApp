@@ -1,13 +1,20 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { startLogout } from '../../actions/auth';
+import { startNewNote } from '../../actions/notes';
 import JorunalEntris from './JorunalEntris'
 
 const Sidebar = () => {
 
   const { name } = useSelector(state => state.auth);
   const dispatch = useDispatch();
+
   const handleLogout = () => (dispatch(startLogout()));
+
+  const handleAddNew = () => {
+    dispatch( startNewNote() );
+  }
+
   return (
     <aside className="joirnal__sidebar">
       <div className="joirnal__sidebar-navbar">
@@ -22,7 +29,10 @@ const Sidebar = () => {
           logout
         </button>
       </div>
-      <div className="journal__new-entry">
+      <div 
+        className="journal__new-entry"
+        onClick={ handleAddNew }
+      >
         <i className="fa fa-calendar-plus fa-5x"></i>
         <p className="mt-5">
           New entry
