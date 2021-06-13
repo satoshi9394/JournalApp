@@ -4,8 +4,8 @@ const useForm = (initialStatev = {}) => {
 
   const [ values, setValues ] = useState(initialStatev);
 
-  const reset = () => {
-    setValues( initialStatev )
+  const reset = (newFormState = initialStatev) => {
+    setValues( newFormState )
   }
 
   const handleInpuntChange = ({target}) => {

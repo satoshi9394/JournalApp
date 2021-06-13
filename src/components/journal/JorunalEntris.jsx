@@ -6,8 +6,6 @@ const JorunalEntris = () => {
 
   const { notes } = useSelector(state => state.notes);
 
-  console.info(notes);
-
   return (
     <div className="journal__entries">
       {

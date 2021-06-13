@@ -2,6 +2,8 @@ import { db } from "../firebase/firebaseConfig";
 import { loadNotes } from "../helpers/loadNotes";
 import { types } from '../types/types';
 
+const BASE_URL_NOTE= '/journal/notes/';
+
 export const startNewNote = () => {
   return  async(dispatch,  getState ) => {
     const { uid } = getState().auth;
@@ -10,7 +12,7 @@ export const startNewNote = () => {
       body: '',
       date: new Date().getTime()
     }
-    const doc = await db.collection(`${ uid }/journal/notes`).add( newNote );
+    const doc = await db.collection(`${ uid }${BASE_URL_NOTE}`).add( newNote );
     dispatch( activeNote(doc.id, newNote ))
   }
 }
@@ -34,3 +36,16 @@ export const setNotes = ( notes ) => ({
   type: types.notesLoad,
   payload: notes
 });
+
+export const startSaveNote = (note) => {
+  return async(dispatch, getState) => {
+    const { uid } = getState().auth;
+    if (!note.url) {
+      delete note.url;
+    }
+    const noteToFirestore = {...note};
+    delete noteToFirestore.id;
+    const urlToFirestore = `${uid}${BASE_URL_NOTE}${note.id}`;
+    await db.doc(urlToFirestore).update(noteToFirestore);
+  }
+};
