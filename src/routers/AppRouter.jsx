@@ -8,8 +8,7 @@ import {
 import { useDispatch } from 'react-redux';
 import { auth } from '../firebase/firebaseConfig';
 import { login } from '../actions/auth';
-import { loadNotes } from '../helpers/loadNotes';
-import { setNotes } from '../actions/notes';
+import { startLoadingNotes } from '../actions/notes';
 
 import AuthRouter from './AuthRouter';
 import PublicRouter from './PublicRouter';
@@ -28,8 +27,7 @@ const AppRouter = () => {
       if (user?.uid) {
         dispatch( login( user.uid, user.displayName ));
         setisLoggedIn(true);
-        const notes = await loadNotes( user.uid );
-        dispatch(setNotes(notes));
+        dispatch(startLoadingNotes(user.uid));
       } else {
         setisLoggedIn(false);
       }

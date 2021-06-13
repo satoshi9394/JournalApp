@@ -26,3 +26,6 @@ yarn-error.log*
 
 #FirebaseApp
 /src/firebase/firebaseConfig.js
+
+#IDE
+.idea
