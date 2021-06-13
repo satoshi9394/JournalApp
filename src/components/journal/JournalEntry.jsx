@@ -1,30 +1,38 @@
-import React from 'react'
+import React from 'react';
+import format from 'date-fns/format';
 
-const JournalEntry = () => {
+const JournalEntry = ({ id, date, title, body, url }) => {
+
+  const noteDayName = format(date, 'iiii');
+  const noteDayNum = format(date, 'do');
+
   return (
     <div className="journal__entry pointer">
-      <div 
-        className="journal__entry-pricture"
-        style={{
-          backgroundSize: 'cover',
-          backgroundImage: 'url(https://i.imgur.com/xbQ9KB3.jpeg)'
-        }}
-      >
-      </div>
+      {
+        url &&
+        <div 
+          className="journal__entry-pricture"
+          style={{
+            backgroundSize: 'cover',
+            backgroundImage: `url(${ url })`
+          }}
+        >
+        </div>
+      }
       <div className="journal__entry-body">
         <p className="journal__entry-title">
-          Un nuevo dia
+          {title}
         </p>
         <p className="journal__entry-content">
-          lorsdaytdajtfsjfysyfsdfd sdgdgfjnh dfsdgyhdrf rfgdfhjdfgjdfg
+          {body}
         </p>
       </div>
       <div className="journal__entry-date-box">
-        <span>Monday</span>
-        <h4>28</h4>
+        <span> {noteDayName} </span>
+        <h4>{ noteDayNum }</h4>
       </div>
     </div>
   )
-}
+};
 
 export default JournalEntry
