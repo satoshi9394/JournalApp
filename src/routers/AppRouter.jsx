@@ -4,7 +4,6 @@ import {
   Switch,
   Redirect
 } from "react-router-dom";
-
 import { useDispatch } from 'react-redux';
 import { auth } from '../firebase/firebaseConfig';
 import { login } from '../actions/auth';
