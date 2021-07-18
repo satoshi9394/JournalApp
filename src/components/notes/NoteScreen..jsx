@@ -51,7 +51,7 @@ const NoteScreen = () => {
           { 
             note.url &&
             <img
-              src="https://i.imgur.com/bGOiREC.jpeg"
+              src={note.url}
               alt="sol"
             />
           }

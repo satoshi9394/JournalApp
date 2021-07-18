@@ -11,9 +11,7 @@ const NotesAppBar = () => {
   };
 
   const handlePicture = () => {
-    console.log('picture');
     document.getElementById('fileSelector').click();
-
   }
 
   const handleFileChange = (e) => {
