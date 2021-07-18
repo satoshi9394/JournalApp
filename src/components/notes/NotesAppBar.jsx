@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { startSaveNote, startUploading } from '../../actions/notes';
+import format from 'date-fns/format';
 
 const NotesAppBar = () => {
   const dispatch = useDispatch();
@@ -21,9 +22,14 @@ const NotesAppBar = () => {
     }
   }
 
+  const dateNow = Date.now();
+  const day = format(dateNow,'dd');
+  const month = format(dateNow,'MMM');
+  const year = format(dateNow,'yyyy');
+
   return (
     <div className="notes__appbar">
-      <span>28 de agosto del 2020</span>
+      <span>{`${month} ${day}, ${year}`}</span>
       <input 
         id="fileSelector"
         type="file"
