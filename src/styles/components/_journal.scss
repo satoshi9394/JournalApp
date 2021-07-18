@@ -21,7 +21,7 @@
   }
 }
 
-.journal__new-entry{
+.journal__new-entry {
   align-items: center;
   cursor: pointer;
   display: flex;
@@ -59,11 +59,12 @@
   }
 }
 
-.journal__entry{
+.journal__entry {
   background-color: $white;
   border-radius: 4px;
   color: $dark-grey;
   display: flex;
+  justify-content: space-between;
   margin-bottom: 10px;
   overflow: hidden;
 }

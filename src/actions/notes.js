@@ -6,8 +6,6 @@ import Swal from 'sweetalert2'
 
 const BASE_URL_NOTE= '/journal/notes/';
 
-//react-journal
-
 export const startNewNote = () => {
   return  async(dispatch,  getState ) => {
     const { uid } = getState().auth;
@@ -17,7 +15,8 @@ export const startNewNote = () => {
       date: new Date().getTime()
     }
     const doc = await db.collection(`${ uid }${BASE_URL_NOTE}`).add( newNote );
-    dispatch( activeNote(doc.id, newNote ))
+    dispatch( activeNote(doc.id, newNote ));
+    dispatch(addNewNote(doc.id, newNote))
   }
 }
 
@@ -30,6 +29,14 @@ export const startLoadingNotes = ( uid ) => {
 
 export const activeNote = (id, note) => ({
   type: types.notesActive,
+  payload: {
+    id,
+    ...note
+  }
+});
+
+export const addNewNote = (id, note) => ({
+  type: types.notesAddNew,
   payload: {
     id,
     ...note
@@ -89,3 +96,20 @@ export const startUploading = (file) => {
     Swal.close();
   }
 }
+
+export const startDeleting = (id) => {
+  return async(dispatch, getState) => {
+    const uid = getState().auth.uid;
+    await db.doc(`${uid}/journal/notes/${id}`).delete();
+    dispatch(deleteNote(id));
+  }
+}
+
+export const deleteNote = (id) => ({
+  type: types.notesDelete,
+  payload: id
+});
+
+export const noteLogout = () => ({
+  type: types.notesLogoutCleaning
+});
