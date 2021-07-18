@@ -1,9 +1,12 @@
 import { db } from "../firebase/firebaseConfig";
 import { loadNotes } from "../helpers/loadNotes";
 import { types } from '../types/types';
+import { fileUpload } from '../helpers/fileUpload';
 import Swal from 'sweetalert2'
 
 const BASE_URL_NOTE= '/journal/notes/';
+
+//react-journal
 
 export const startNewNote = () => {
   return  async(dispatch,  getState ) => {
@@ -68,3 +71,11 @@ export const refreshNote = (id, note) => ({
     }
   }
 });
+
+export const startUploading = (file) => {
+  return async ( dispatch, getState ) => {
+    const {active: activeNote } = getState().notes;
+    const fileUrl = await fileUpload(file);
+    console.info(fileUrl);
+  }
+}
